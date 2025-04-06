@@ -12,7 +12,7 @@ sys.path.append(os.environ['PYTHONPATH'])
 
 from source.game import Game
 
-def play():
+def play() -> None:
     """
     Main function to play the game
     """

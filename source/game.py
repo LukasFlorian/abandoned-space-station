@@ -22,7 +22,7 @@ class Game:
         Initializes the game with a new board.
         """
         # Initialize the board
-        self._board = None
+        self._board = Board()
 
         # Initialize the game state
         # self._game_over = True does not mean the user lost, it means the game is over
@@ -34,7 +34,7 @@ class Game:
         # Initialize the main menu
         self.main_menu()
 
-    def main_menu(self):
+    def main_menu(self) -> None:
         """
         Prints the introduction to the game.
         """
@@ -64,7 +64,7 @@ class Game:
             except AssertionError:
                 print("\nInvalid input. Please enter 'y' or 'n'. ")
 
-    def display_board_and_instructions(self):
+    def display_board_and_instructions(self) -> None:
         """
         Displays the board of the game and instructions
         """
@@ -76,7 +76,7 @@ class Game:
         print("Let's start!")
         print("Enter the row and column of the cell you want to scan (e.g. 1 2): ")
 
-    def play_menu(self):
+    def play_menu(self) -> None:
         """
         Displays the board of the game and handles user interactions.
         """

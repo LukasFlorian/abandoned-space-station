@@ -12,7 +12,7 @@ os.environ['PYTHONPATH'] = this_path
 sys.path.append(os.environ['PYTHONPATH'])
 
 
-from source import main
+import source
 from source.main import play
 
 
@@ -20,7 +20,7 @@ class TestMain(unittest.TestCase):
     """Test cases for the main module"""
 
     @patch('source.main.Game')
-    def test_play(self, mock_game):
+    def test_play(self, mock_game: unittest.mock.MagicMock) -> None:
         """Test the play function"""
         # Call the play function
         play()
@@ -28,12 +28,12 @@ class TestMain(unittest.TestCase):
         # Check that Game was instantiated
         mock_game.assert_called_once()
 
-    def test_pythonpath(self):
+    def test_pythonpath(self) -> None:
         """Test that PYTHONPATH is set correctly"""
         # Import the main module
 
         # Check that the correct path was appended to sys.path
-        expected_path = os.path.dirname(os.path.dirname(os.path.abspath(main.__file__)))
+        expected_path = os.path.dirname(os.path.dirname(os.path.abspath(source.main.__file__)))
         sys_paths = [os.path.abspath(p) for p in sys.path]
         self.assertIn(expected_path, sys_paths)
 

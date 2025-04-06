@@ -19,7 +19,7 @@ from source.helpers import clear, wait
 class TestHelpers(unittest.TestCase):
     """Unittest TestCase class for the helpers module"""
     @patch("os.system")
-    def test_clear(self, mock_system):
+    def test_clear(self, mock_system: unittest.mock.MagicMock) -> None:
         """Test that the clear function calls the correct system command."""
         clear()
         # Check if os.system was called with the correct command
@@ -28,7 +28,7 @@ class TestHelpers(unittest.TestCase):
         else:
             mock_system.assert_called_with('clear')
 
-    def test_wait(self):
+    def test_wait(self) -> None:
         """Test that the wait function waits approximately the correct amount of time."""
         start_time = time.time()
         wait(2)  # Wait for 2 seconds

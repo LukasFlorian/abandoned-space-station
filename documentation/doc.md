@@ -2,7 +2,6 @@
 
 ## Inhaltsverzeichnis
 
-
 - [Abandoned Space Station](#abandoned-space-station)
   - [Inhaltsverzeichnis](#inhaltsverzeichnis)
   - [Beschreibung](#beschreibung)

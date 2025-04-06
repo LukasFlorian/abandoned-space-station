@@ -46,7 +46,7 @@ class Board:
         self._place_traps(num_traps)
 
     @property
-    def width(self):
+    def width(self) -> int:
         """
         Returns the width of the board.
         
@@ -56,7 +56,7 @@ class Board:
         return self._width
 
     @property
-    def height(self):
+    def height(self) -> int:
         """
         Returns the height of the board.
         
@@ -65,7 +65,7 @@ class Board:
         """
         return self._height
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Returns a string representation of the board.
             
         Returns:
@@ -93,12 +93,12 @@ class Board:
             printed_board += self._separator
         return printed_board
 
-    def _place_traps(self, num_traps: int = 2):
+    def _place_traps(self, num_traps: int = 2) -> None:
         """
         Places traps on the board.
         """
         # Place traps randomly on the board
-        traps = set()
+        traps: set[tuple[int, int]] = set()
         while len(traps) < num_traps:
             # Generate random row and column indices for the trap
             row = randint(0, self.height - 1)
@@ -129,7 +129,7 @@ class Board:
                 self._surrounding[row + 1][col + 1] += 1
 
     @property
-    def solution(self):
+    def solution(self) -> str:
         """
         Returns the solution for the board (all traps and numbers of traps surrounding each field)
 

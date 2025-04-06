@@ -4,13 +4,13 @@ Helper functions
 
 import os
 
-def clear():
+def clear() -> None:
     """
     Clears the console
     """
     os.system('cls' if os.name=='nt' else 'clear')
 
-def wait(seconds):
+def wait(seconds: float) -> None:
     """
     Waits for a given number of seconds and is required since the time module is not allowed.
     """

@@ -22,7 +22,7 @@ class TestGame(unittest.TestCase):
 
 
     @patch('builtins.input')
-    def test_main_menu_play(self, mock_input):
+    def test_main_menu_play(self, mock_input: MagicMock) -> None:
         """Test the main menu when selecting to play"""
         # Mock input to return 'y' (play)
         mock_input.return_value = 'y'
@@ -33,7 +33,7 @@ class TestGame(unittest.TestCase):
             mock_play_menu.assert_called_once()
 
     @patch('builtins.input')
-    def test_main_menu_quit(self, mock_input):
+    def test_main_menu_quit(self, mock_input: unittest.mock.MagicMock) -> None:
         """Test the main menu when selecting to quit"""
         # Mock input to return 'n' (quit)
         mock_input.return_value = 'n'
@@ -42,11 +42,11 @@ class TestGame(unittest.TestCase):
         try:
             Game(wait_time = 0)
             # It should reach here without calling play_menu
-        except [ValueError, TypeError] as e:
+        except (ValueError, TypeError) as e:
             self.fail(f"Game(wait_time = 0) raised exception unexpectedly: {e}")
 
     @patch('builtins.input')
-    def test_main_menu_invalid_then_valid(self, mock_input):
+    def test_main_menu_invalid_then_valid(self, mock_input: unittest.mock.MagicMock) -> None:
         """Test the main menu with invalid input followed by valid input"""
         # Mock input to return invalid input, then 'n' (quit)
         mock_input.side_effect = ['invalid', 'n']
@@ -58,13 +58,11 @@ class TestGame(unittest.TestCase):
         self.assertEqual(mock_input.call_count, 2)
 
     @patch('source.game.clear')
-    def test_display_board_and_instructions(self, mock_clear):
+    def test_display_board_and_instructions(self, mock_clear: unittest.mock.MagicMock) -> None:
         """Test displaying the board and instructions"""
         # Create a game instance with a mocked board
         with patch.object(Game, 'main_menu'):
             game = Game(wait_time = 0)
-            game._board = MagicMock()
-            game._board.__str__.return_value = "Mock board"
 
             # Call the method
             game.display_board_and_instructions()
@@ -75,7 +73,7 @@ class TestGame(unittest.TestCase):
 
     @patch('source.game.wait')
     @patch('builtins.input')
-    def test_play_menu_trap(self, mock_input, mock_wait):
+    def test_play_menu_trap(self, mock_input: unittest.mock.MagicMock, mock_wait: unittest.mock.MagicMock) -> None:
         """Test playing the game and hitting a trap"""
         # Create a game instance
         with patch('source.game.Board') as mock_board_class:
@@ -110,7 +108,7 @@ class TestGame(unittest.TestCase):
                 mock_wait.assert_called()
 
     @patch('builtins.input')
-    def test_play_menu_win(self, mock_input):
+    def test_play_menu_win(self, mock_input: unittest.mock.MagicMock) -> None:
         """Test playing the game and winning"""
         # Create a game instance
         with patch('source.game.Board') as mock_board_class:
@@ -145,7 +143,7 @@ class TestGame(unittest.TestCase):
                 mock_board.scan_field.assert_called()
 
     @patch('builtins.input')
-    def test_play_menu_invalid_input(self, mock_input):
+    def test_play_menu_invalid_input(self, mock_input: unittest.mock.MagicMock) -> None:
         """Test playing the game with invalid input"""
         # Create a game instance
         with patch('source.game.Board') as mock_board_class:
