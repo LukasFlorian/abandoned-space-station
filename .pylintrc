@@ -1,0 +1,16 @@
+[MASTER]
+# Use the default pylint configuration, but disable the following checks:
+
+# 1. line-too-long: This is because the default line length is 100 characters, which is too short for many of the docstrings in this project. It would be possible to only disable this check for the docstrings manually, but then the corresponding pylint command would be included in the docstrings.
+
+# 2. wrong-import-position: This is because the imports are not at the top of the file, but this is not a problem for this project.
+
+disable = line-too-long, wrong-import-position
+
+# Add the following configuration to the pylint configuration file:
+
+
+# 3. init-hook: This is because the project is not yet installed in the environment, so pylint cannot find the modules.
+
+
+init-hook='import sys; sys.path.append(".")'
