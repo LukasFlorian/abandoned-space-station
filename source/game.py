@@ -17,7 +17,7 @@ class Game:
     """
     A class representing the game, its state and methods to create a user interface based on the board state.
     """
-    def __init__(self):
+    def __init__(self, wait_time: float = 5):
         """
         Initializes the game with a new board.
         """
@@ -27,6 +27,9 @@ class Game:
         # Initialize the game state
         # self._game_over = True does not mean the user lost, it means the game is over
         self._game_over = False
+
+        # Initialize the wait time (as an optional attribute so it can be set to zero for testing)
+        self._wait_time = wait_time
 
         # Initialize the main menu
         self.main_menu()
@@ -114,5 +117,5 @@ class Game:
                 except AssertionError:
                     print("Invalid input. Please enter a valid row and column.")
         print("\nYou'll automatically return to the main menu in 5 seconds.")
-        wait(5)
+        wait(self._wait_time)
         self.main_menu()

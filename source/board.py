@@ -172,6 +172,7 @@ class Board:
         # Check if the field is a trap; if it is, return False
         if self._traps[row][col]:
             self._discovered[row][col] = True
+            self.discoverable -= 1
             return False
         # If the field is not a trap but surrounded by traps, reveal only the selected field
         if self._surrounding[row][col] > 0:
