@@ -117,5 +117,6 @@ class Game:
                 except AssertionError:
                     print("Invalid input. Please enter a valid row and column.")
         print("\nYou'll automatically return to the main menu in 5 seconds.")
+        self._board = Board()
         wait(self._wait_time)
         self.main_menu()

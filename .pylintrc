@@ -1,15 +1,15 @@
 [MASTER]
 # Use the default pylint configuration, but disable the following checks:
 
-# 1. line-too-long: This is because the default line length is 100 characters, which is too short for many of the docstrings in this project. It would be possible to only disable this check for the docstrings manually, but then the corresponding pylint command would be included in the docstrings.
+# 1. line-too-long: This is because the default line length is 100 characters, which is too short for many of the docstrings in this project. It would be possible to only disable this check for the docstrings manually, but then the corresponding pylint command would be included in the docstrings and make them look cluttered.
 
-# 2. wrong-import-position: This is because not all imports are at the top of the file, but this is not a problem for this project. The specific reason is that the modules can only be imported after the current project's root directory is added to the python path, which means there is "non-import code" before the imports of project modules.
+# 2. wrong-import-position: This is because not all imports are at the top of the file, which is necessary for this project. The specific reason is that the modules can only be imported after the current project's root directory is added to the python path, which means there is "non-import code" before the imports of project modules.
 
 # 3. protected-access: This is because the unittests need to access protected attributes and methods of the classes in order to test them properly.
 
 disable = line-too-long, wrong-import-position, protected-access
 
 
-# 4. init-hook: This is because the project is not yet installed in the environment, so pylint cannot find the modules except if the current project's root directory is added to the python path.
+# 4. init-hook: This is because the project is not yet installed in the environment, so pylint cannot find the modules except if the project's root directory is added to the python path.
 
 init-hook='import sys; sys.path.append(".")'

@@ -9,14 +9,25 @@ class Board:
     """
     This class represents a board for the game, containing information about the position of traps, the number of surrounding traps and the state of each cell (discovered or not).
     """
-    def __init__(self, width: int = randint(5,10), height: int = randint(5,10)):
+    def __init__(self, width: int = 0, height: int = 0):
         """
         Initializes the board based on the width and height parameters.
 
         Args:
-            width (int, optional): Board width (number of columns). Defaults to randint(5,10).
-            height (int, optional): Board height (number of rows). Defaults to randint(5,10).
+            width (int, optional): Board width (number of columns). Defaults to 0.
+            height (int, optional): Board height (number of rows). Defaults to 0.
         """
+        if width == 0:
+            # Random width between 5 and 10 if not specified
+            # (to avoid having a board with less than 5 columns)
+            # Less than 5 columns are only allowed for testing purposes, thus the condition width == 0 instead of width < 5
+            width = randint(5, 10)
+        if height == 0:
+            # Random height between 5 and 10 if not specified
+            # (to avoid having a board with less than 5 rows)
+            # Less than 5 rows are only allowed for testing purposes, thus the condition height == 0 instead of height < 5
+            height = randint(5, 10)
+
         # board width
         self._width = width
 
@@ -169,19 +180,18 @@ class Board:
         Returns:
             bool: Boolean indicating whether the field is safe or not
         """
+        if self._discovered[row][col]:
+            # Avoid scanning the same field twice
+            return True
+
         # Check if the field is a trap; if it is, return False
         if self._traps[row][col]:
             self._discovered[row][col] = True
             self.discoverable -= 1
             return False
-        # If the field is not a trap but surrounded by traps, reveal only the selected field
-        if self._surrounding[row][col] > 0:
-            # Reveal the field
-            self._discovered[row][col] = True
-            # Decrement the number of discoverable fields
-            self.discoverable -= 1
-            return True
-        # If the field is not a trap and has no surrounding traps, reveal all safe fields surrounding the field
+
+        # If the field is not a trap reveal all trivially safe fields surrounding the field that can be deduced from the current field
+        # Trivially safe fields are fields that cannot be traps because they are adjacent to a field that has zero surrounding traps
         # Use a queue to keep track of the fields to be revealed
         # Use a set to keep track of the fields that have already been checked to avoid infinite loops
         queue = set()
